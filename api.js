@@ -1,18 +1,21 @@
+const BASE_URL = "https://swapi.dev/api/planets/";
 
+export async function getAllPlanets() {
+    let planets = [];
+    let url = BASE_URL;
 
-export const fetchPlanetas = async () => {
     try {
-        const URL_PLANETAS = 'https://swapi.info/api/planets/';
-        const respuesta = await fetch(URL_PLANETAS);
+        while (url) {
+            const response = await fetch(url);
+            const data = await response.json();
 
-        if (!respuesta.ok) {
-            throw new Error(`Èrror HTTP: ${respuesta.status}`);
+            planets = [...planets, ...data.results];
+            url = data.next; // siguiente página
         }
 
-        const datos = respuesta.json;
-        return datos.results;
+        return planets;
     } catch (error) {
-        console.error("Error al consultar API: ", error);
+        console.error("Error al obtener los planetas:", error);
         return [];
     }
-};
+}

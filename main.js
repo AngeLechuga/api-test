@@ -1,21 +1,15 @@
-import { fetchPlanetas } from "./api.js"; 
-import { pintarPlanetas } from "./dom.js";
+import { getAllPlanets } from "./api.js";
+import { renderPlanets } from "./dom.js";
 
-const iniciarApp = async () => {
-    console.log("Cargando planetas de starwars ...");
+const loadBtn = document.getElementById("loadBtn");
 
-    // obtención de datos
-    const planetas = await fetchPlanetas() || [];
+loadBtn.addEventListener("click", async () => {
+    loadBtn.disabled = true;
+    loadBtn.textContent = "Cargando...";
 
-    // --- AGREGAMOS EL LOG PARA DEPURACIÓN ---
-    console.log("Datos recibidos de la API:", planetas);
+    const planets = await getAllPlanets();
+    renderPlanets(planets);
 
-    if (planetas.length > 0) {
-        pintarPlanetas(planetas);
-        document.getElementById('info-header').textContent = "Datos cargados correctamente";
-    }else{
-        document.getElementById('info-header').textContent = "Error al cargar datos";
-    };
-};
-
-document.addEventListener('DOMContentLoaded', iniciarApp);
+    loadBtn.textContent = "Cargar Planetas";
+    loadBtn.disabled = false;
+});
