@@ -48,11 +48,10 @@ button:hover {
 .card {
     background-color: rgba(22, 27, 34, 0.8);
     padding: 20px;
-    border-radius: 0px; /* Bordes rectos para un look más industrial/militar */
+    border-radius: 0px; 
     border-left: 4px solid #ffe81f; /* Detalle de color lateral */
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
     transition: transform 0.2s ease;
-    /* Texto interno en blanco para legibilidad, manteniendo el aura amarilla */
     color: #fff;
 }
 
